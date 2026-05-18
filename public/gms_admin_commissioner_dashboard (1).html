@@ -1,0 +1,361 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Noto+Sans:wght@400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0B2545;--navy2:#1B3A6B;--cyan:#0097A7;--cyan-light:#E0F7FA;
+  --amber:#D97706;--amber-light:#FEF3C7;--danger:#DC2626;--danger-light:#FEE2E2;
+  --success:#16A34A;--success-light:#DCFCE7;--purple:#7C3AED;--purple-light:#EDE9FE;
+  --surface:var(--color-background-primary);--bg:var(--color-background-secondary);
+  --border:var(--color-border-tertiary);--text:var(--color-text-primary);--muted:var(--color-text-secondary);
+  --radius:10px;--ff:'Noto Sans',sans-serif;--ffh:'Baloo 2',sans-serif;
+}
+.adm{font-family:var(--ff);color:var(--text);background:var(--bg);min-height:640px}
+.adm-top{background:var(--navy);color:#fff;padding:0 20px;display:flex;align-items:stretch;justify-content:space-between}
+.adm-logo{display:flex;align-items:center;gap:10px;padding:10px 0}
+.adm-logo-icon{width:30px;height:30px;background:rgba(255,255,255,.15);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px}
+.adm-logo-text{font-family:var(--ffh);font-size:14px;font-weight:700;line-height:1.2}
+.adm-logo-sub{font-size:9px;opacity:.65;letter-spacing:.03em}
+.adm-nav{display:flex;align-items:stretch;gap:0}
+.adm-ntab{padding:0 14px;font-size:11px;color:rgba(255,255,255,.7);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;font-family:var(--ffh);font-weight:500;display:flex;align-items:center;gap:5px}
+.adm-ntab.act{color:#fff;border-bottom-color:#00BCD4}
+.adm-ntab:hover:not(.act){color:#fff;background:rgba(255,255,255,.08)}
+.alert-bar{background:#7F1D1D;color:#FCA5A5;padding:7px 20px;font-size:11.5px;display:flex;align-items:center;gap:8px}
+.alert-pulse{width:8px;height:8px;border-radius:50%;background:#F87171;animation:pulse 1.2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.adm-body{display:grid;grid-template-columns:220px 1fr;min-height:580px}
+.sidebar{background:var(--navy2);color:#fff;padding:12px 0;display:flex;flex-direction:column;gap:2px}
+.sb-section{padding:6px 14px 2px;font-size:9px;text-transform:uppercase;letter-spacing:.08em;opacity:.45;font-weight:500}
+.sb-item{display:flex;align-items:center;gap:8px;padding:7px 14px;font-size:11.5px;color:rgba(255,255,255,.7);cursor:pointer;transition:all .15s;position:relative}
+.sb-item.act{color:#fff;background:rgba(255,255,255,.12)}
+.sb-item.act::before{content:'';position:absolute;left:0;top:0;width:2.5px;height:100%;background:#00BCD4;border-radius:0 2px 2px 0}
+.sb-item:hover:not(.act){color:#fff;background:rgba(255,255,255,.07)}
+.sb-icon{font-size:13px;width:16px;text-align:center}
+.sb-badge{margin-left:auto;background:#DC2626;color:#fff;border-radius:10px;padding:1px 6px;font-size:9px;font-weight:600}
+.sb-badge.amber{background:#D97706}
+.content{padding:14px 16px;overflow:hidden}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.kpi{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:10px 12px}
+.kpi-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:500;margin-bottom:3px}
+.kpi-val{font-size:20px;font-family:var(--ffh);font-weight:700;line-height:1}
+.kpi-sub{font-size:10px;margin-top:3px;display:flex;align-items:center;gap:3px}
+.up{color:#16A34A}.dn{color:#DC2626}
+.section-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:10px}
+.sh{padding:8px 12px;border-bottom:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.sh-title{font-family:var(--ffh);font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px}
+.sh-icon{width:18px;height:18px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px}
+.action-btn{padding:4px 10px;border-radius:6px;border:0.5px solid var(--border);font-size:10.5px;cursor:pointer;background:var(--bg);font-family:var(--ff);color:var(--text)}
+.action-btn:hover{background:var(--border)}
+.griev-table{width:100%;border-collapse:collapse;font-size:11px}
+.griev-table th{padding:6px 10px;text-align:left;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-weight:500;border-bottom:0.5px solid var(--border)}
+.griev-table td{padding:7px 10px;border-bottom:0.5px solid var(--border);vertical-align:middle}
+.griev-table tr:last-child td{border-bottom:none}
+.griev-table tr:hover td{background:var(--bg)}
+.gid{font-family:monospace;font-size:10.5px;color:#1B3A6B}
+.status-pill{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:500;white-space:nowrap}
+.sp-new{background:#DBEAFE;color:#1E40AF}
+.sp-prog{background:#FEF3C7;color:#92400E}
+.sp-esc{background:#FEE2E2;color:#991B1B}
+.sp-done{background:#DCFCE7;color:#14532D}
+.dept-badge{padding:2px 6px;border-radius:4px;font-size:9.5px;font-weight:500}
+.route-btn{padding:3px 8px;background:#EDE9FE;color:#5B21B6;border-radius:5px;font-size:10px;cursor:pointer;border:none;font-family:var(--ff)}
+.route-btn:hover{background:#DDD6FE}
+.esc-btn{padding:3px 8px;background:#FEE2E2;color:#991B1B;border-radius:5px;font-size:10px;cursor:pointer;border:none;font-family:var(--ff)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.leaderboard{display:flex;flex-direction:column;gap:0}
+.lb-row{display:flex;align-items:center;gap:8px;padding:7px 12px;border-bottom:0.5px solid var(--border)}
+.lb-row:last-child{border-bottom:none}
+.lb-rank{width:18px;font-size:11px;font-weight:700;text-align:center;color:var(--muted)}
+.lb-rank.gold{color:#D97706}
+.lb-rank.silver{color:#6B7280}
+.lb-rank.bronze{color:#92400E}
+.lb-avatar{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0}
+.lb-info{flex:1}
+.lb-name{font-size:11.5px;font-weight:500}
+.lb-dept{font-size:9.5px;color:var(--muted)}
+.lb-bar-wrap{width:70px}
+.lb-bar{height:5px;border-radius:3px;background:var(--border);overflow:hidden}
+.lb-fill{height:100%;border-radius:3px;background:#16A34A}
+.lb-score{font-size:11px;font-weight:600;color:#16A34A;min-width:28px;text-align:right}
+.heatmap-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;padding:12px}
+.ward-cell{border-radius:5px;padding:7px 4px;text-align:center;cursor:pointer;transition:opacity .15s}
+.ward-cell:hover{opacity:.8}
+.ward-label{font-size:9px;font-weight:500;color:#fff}
+.ward-count{font-size:11px;font-weight:700;color:#fff}
+.hmap-legend{display:flex;align-items:center;gap:8px;padding:0 12px 10px;font-size:10px;color:var(--muted)}
+.hmap-ramp{display:flex;align-items:center;gap:2px}
+.ramp-step{width:18px;height:7px;border-radius:2px}
+.audit-row{display:flex;align-items:flex-start;gap:8px;padding:6px 12px;border-bottom:0.5px solid var(--border);font-size:11px}
+.audit-row:last-child{border-bottom:none}
+.audit-dot{width:7px;height:7px;border-radius:50%;margin-top:4px;flex-shrink:0}
+.audit-time{font-size:10px;color:var(--muted);min-width:100px}
+.report-row{display:flex;align-items:center;justify-content:space-between;padding:6px 12px;border-bottom:0.5px solid var(--border);font-size:11.5px}
+.report-row:last-child{border-bottom:none}
+.dl-btn{padding:3px 9px;background:var(--bg);border:0.5px solid var(--border);border-radius:5px;font-size:10px;cursor:pointer;font-family:var(--ff);display:flex;align-items:center;gap:4px}
+</style>
+
+<h2 class="sr-only">GMS Admin — Municipal Commissioner Control Centre</h2>
+
+<div class="adm">
+  <div class="adm-top">
+    <div class="adm-logo">
+      <div class="adm-logo-icon">&#127963;</div>
+      <div>
+        <div class="adm-logo-text">GMS Admin — Commissioner</div>
+        <div class="adm-logo-sub">NAGAR PALIKA CONTROL CENTRE</div>
+      </div>
+    </div>
+    <div class="adm-nav">
+      <div class="adm-ntab act" onclick="showPane('overview')">&#128202; Overview</div>
+      <div class="adm-ntab" onclick="showPane('queue')">&#128196; Queue</div>
+      <div class="adm-ntab" onclick="showPane('analytics')">&#128200; Analytics</div>
+      <div class="adm-ntab" onclick="showPane('sysadmin')">&#9881; System</div>
+    </div>
+  </div>
+
+  <div class="alert-bar">
+    <div class="alert-pulse"></div>
+    <strong>3 SLA Breaches:</strong> MNN-2026-004412 (Roads, +2d overdue) · MNN-2026-004501 (Water, +1d) · MNN-2026-004603 (Sanitation, due today)
+    &nbsp;—&nbsp; Auto-escalation emails sent to Commissioner.
+  </div>
+
+  <div class="adm-body">
+    <div class="sidebar">
+      <div class="sb-section">Grievance Mgmt</div>
+      <div class="sb-item act">&#128196;<span class="sb-icon"></span>Unassigned Queue <span class="sb-badge">14</span></div>
+      <div class="sb-item">&#128260;<span></span>Cross-Dept Transfers</div>
+      <div class="sb-item">&#128680;<span></span>SLA Escalations <span class="sb-badge amber">3</span></div>
+      <div class="sb-item">&#128228;<span></span>Internal Notes</div>
+      <div class="sb-section">Analytics</div>
+      <div class="sb-item">&#127759;<span></span>Ward Heat-Map</div>
+      <div class="sb-item">&#127941;<span></span>Staff Leaderboard</div>
+      <div class="sb-item">&#128196;<span></span>Reports &amp; Exports</div>
+      <div class="sb-item">&#128221;<span></span>Audit Trail</div>
+      <div class="sb-section">System Admin</div>
+      <div class="sb-item">&#128100;<span></span>User Management</div>
+      <div class="sb-item">&#9881;<span></span>SLA Configuration</div>
+      <div class="sb-item">&#128197;<span></span>Holiday Calendar</div>
+      <div class="sb-item">&#128241;<span></span>SMS Templates</div>
+      <div class="sb-item">&#128274;<span></span>RBAC Permissions</div>
+    </div>
+
+    <div class="content">
+
+      <div id="pane-overview">
+        <div class="kpi-row">
+          <div class="kpi">
+            <div class="kpi-label">Total Active</div>
+            <div class="kpi-val">1,214</div>
+            <div class="kpi-sub"><span class="dn">&#8593;</span><span class="dn">+42 today</span></div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">SLA Breaches</div>
+            <div class="kpi-val" style="color:#DC2626">36</div>
+            <div class="kpi-sub"><span class="dn">3 critical</span></div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Avg. Resolution</div>
+            <div class="kpi-val">4.2d</div>
+            <div class="kpi-sub"><span class="up">&#8595;</span><span class="up">-0.8d vs last month</span></div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Citizen Rating</div>
+            <div class="kpi-val">3.8<span style="font-size:12px;color:var(--muted)">/5</span></div>
+            <div class="kpi-sub"><span class="up">&#8593;</span><span class="up">+0.2 vs last month</span></div>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <div class="sh">
+            <div class="sh-title"><div class="sh-icon" style="background:#EDE9FE;color:#5B21B6">&#128196;</div>Unassigned Grievances — Route to Department</div>
+            <button class="action-btn">Bulk Route &#8594;</button>
+          </div>
+          <table class="griev-table">
+            <thead><tr>
+              <th>Grievance ID</th><th>Category</th><th>Ward</th><th>Filed</th><th>Status</th><th>Assign To</th><th>Action</th>
+            </tr></thead>
+            <tbody>
+              <tr>
+                <td class="gid">MNN-2026-004832</td>
+                <td><span class="dept-badge" style="background:#FEE2E2;color:#991B1B">Roads</span></td>
+                <td>Ward 12</td><td>1h ago</td>
+                <td><span class="status-pill sp-new">&#9679; New</span></td>
+                <td><select style="font-size:10.5px;padding:2px 5px;border-radius:5px;border:0.5px solid var(--border);background:var(--bg);font-family:var(--ff)"><option>Roads & Infra</option><option>Water Supply</option><option>Sanitation</option></select></td>
+                <td><button class="route-btn">Route &#8594;</button></td>
+              </tr>
+              <tr>
+                <td class="gid">MNN-2026-004831</td>
+                <td><span class="dept-badge" style="background:#DBEAFE;color:#1E40AF">Water</span></td>
+                <td>Ward 7</td><td>3h ago</td>
+                <td><span class="status-pill sp-new">&#9679; New</span></td>
+                <td><select style="font-size:10.5px;padding:2px 5px;border-radius:5px;border:0.5px solid var(--border);background:var(--bg);font-family:var(--ff)"><option>Water Supply</option><option>Roads & Infra</option></select></td>
+                <td><button class="route-btn">Route &#8594;</button></td>
+              </tr>
+              <tr>
+                <td class="gid">MNN-2026-004603</td>
+                <td><span class="dept-badge" style="background:#F0FFF4;color:#14532D">Sanitation</span></td>
+                <td>Ward 18</td><td>2d ago</td>
+                <td><span class="status-pill sp-esc">&#9888; Escalated</span></td>
+                <td><select style="font-size:10.5px;padding:2px 5px;border-radius:5px;border:0.5px solid var(--border);background:var(--bg);font-family:var(--ff)"><option>Sanitation</option><option>Roads & Infra</option></select></td>
+                <td><button class="esc-btn">Escalate &#9650;</button></td>
+              </tr>
+              <tr>
+                <td class="gid">MNN-2026-004412</td>
+                <td><span class="dept-badge" style="background:#FEE2E2;color:#991B1B">Roads</span></td>
+                <td>Ward 3</td><td>5d ago</td>
+                <td><span class="status-pill sp-esc">&#128680; SLA Breach</span></td>
+                <td><span style="font-size:10px;color:var(--muted)">Already routed</span></td>
+                <td><button class="esc-btn">Transfer &#8646;</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="grid-2">
+          <div class="section-card">
+            <div class="sh"><div class="sh-title"><div class="sh-icon" style="background:#FEF3C7;color:#92400E">&#127941;</div>Staff Leaderboard</div></div>
+            <div class="leaderboard">
+              <div class="lb-row">
+                <div class="lb-rank gold">1</div>
+                <div class="lb-avatar" style="background:#FEF3C7;color:#92400E">RV</div>
+                <div class="lb-info"><div class="lb-name">Rahul Verma</div><div class="lb-dept">Roads & Infra</div></div>
+                <div class="lb-bar-wrap"><div class="lb-bar"><div class="lb-fill" style="width:95%"></div></div></div>
+                <div class="lb-score">97</div>
+              </div>
+              <div class="lb-row">
+                <div class="lb-rank silver">2</div>
+                <div class="lb-avatar" style="background:#DBEAFE;color:#1E40AF">AS</div>
+                <div class="lb-info"><div class="lb-name">Anjali Singh</div><div class="lb-dept">Water Supply</div></div>
+                <div class="lb-bar-wrap"><div class="lb-bar"><div class="lb-fill" style="width:88%"></div></div></div>
+                <div class="lb-score">91</div>
+              </div>
+              <div class="lb-row">
+                <div class="lb-rank bronze">3</div>
+                <div class="lb-avatar" style="background:#EDE9FE;color:#5B21B6">PM</div>
+                <div class="lb-info"><div class="lb-name">Pradeep Mishra</div><div class="lb-dept">Sanitation</div></div>
+                <div class="lb-bar-wrap"><div class="lb-bar"><div class="lb-fill" style="width:80%"></div></div></div>
+                <div class="lb-score">84</div>
+              </div>
+              <div class="lb-row">
+                <div class="lb-rank">4</div>
+                <div class="lb-avatar" style="background:#DCFCE7;color:#14532D">NK</div>
+                <div class="lb-info"><div class="lb-name">Nidhi Kumar</div><div class="lb-dept">Street Lights</div></div>
+                <div class="lb-bar-wrap"><div class="lb-bar"><div class="lb-fill" style="width:71%"></div></div></div>
+                <div class="lb-score">76</div>
+              </div>
+              <div class="lb-row">
+                <div class="lb-rank">5</div>
+                <div class="lb-avatar" style="background:#FEE2E2;color:#991B1B">SK</div>
+                <div class="lb-info"><div class="lb-name">Suresh Khatri</div><div class="lb-dept">Roads & Infra</div></div>
+                <div class="lb-bar-wrap"><div class="lb-bar"><div class="lb-fill" style="width:55%"></div></div></div>
+                <div class="lb-score">59</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="sh"><div class="sh-title"><div class="sh-icon" style="background:#E0F7FA;color:#006064">&#127759;</div>Ward Heat-Map (Grievance Count)</div></div>
+            <div class="heatmap-grid">
+              <div class="ward-cell" style="background:#1B3A6B"><div class="ward-label">W-1</div><div class="ward-count">82</div></div>
+              <div class="ward-cell" style="background:#DC2626"><div class="ward-label">W-2</div><div class="ward-count">147</div></div>
+              <div class="ward-cell" style="background:#D97706"><div class="ward-label">W-3</div><div class="ward-count">93</div></div>
+              <div class="ward-cell" style="background:#1B3A6B"><div class="ward-label">W-4</div><div class="ward-count">41</div></div>
+              <div class="ward-cell" style="background:#0097A7"><div class="ward-label">W-5</div><div class="ward-count">68</div></div>
+              <div class="ward-cell" style="background:#DC2626"><div class="ward-label">W-6</div><div class="ward-count">131</div></div>
+              <div class="ward-cell" style="background:#0097A7"><div class="ward-label">W-7</div><div class="ward-count">72</div></div>
+              <div class="ward-cell" style="background:#D97706"><div class="ward-label">W-8</div><div class="ward-count">109</div></div>
+              <div class="ward-cell" style="background:#16A34A"><div class="ward-label">W-9</div><div class="ward-count">28</div></div>
+              <div class="ward-cell" style="background:#D97706"><div class="ward-label">W-10</div><div class="ward-count">88</div></div>
+              <div class="ward-cell" style="background:#DC2626"><div class="ward-label">W-11</div><div class="ward-count">156</div></div>
+              <div class="ward-cell" style="background:#DC2626"><div class="ward-label">W-12</div><div class="ward-count">141</div></div>
+            </div>
+            <div class="hmap-legend">
+              <span>Low</span>
+              <div class="hmap-ramp">
+                <div class="ramp-step" style="background:#16A34A"></div>
+                <div class="ramp-step" style="background:#0097A7"></div>
+                <div class="ramp-step" style="background:#1B3A6B"></div>
+                <div class="ramp-step" style="background:#D97706"></div>
+                <div class="ramp-step" style="background:#DC2626"></div>
+              </div>
+              <span>High</span>
+              <span style="margin-left:auto;font-size:9px">Click ward for drill-down</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="section-card">
+            <div class="sh"><div class="sh-title"><div class="sh-icon" style="background:#DCFCE7;color:#14532D">&#128196;</div>Reports & Exports</div></div>
+            <div class="report-row">
+              <div><div style="font-size:12px;font-weight:500">Monthly Summary — April 2026</div><div style="font-size:10px;color:var(--muted)">By dept · ward · category</div></div>
+              <div style="display:flex;gap:6px">
+                <button class="dl-btn">&#128196; PDF</button>
+                <button class="dl-btn">&#128202; Excel</button>
+              </div>
+            </div>
+            <div class="report-row">
+              <div><div style="font-size:12px;font-weight:500">SLA Compliance Report</div><div style="font-size:10px;color:var(--muted)">Filterable by date range</div></div>
+              <div style="display:flex;gap:6px">
+                <button class="dl-btn">&#128196; PDF</button>
+                <button class="dl-btn">&#128202; Excel</button>
+              </div>
+            </div>
+            <div class="report-row">
+              <div><div style="font-size:12px;font-weight:500">Staff Performance — Q1 2026</div><div style="font-size:10px;color:var(--muted)">Resolution speed scores</div></div>
+              <div style="display:flex;gap:6px">
+                <button class="dl-btn">&#128196; PDF</button>
+                <button class="dl-btn">&#128202; Excel</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="sh"><div class="sh-title"><div class="sh-icon" style="background:#FEE2E2;color:#991B1B">&#128221;</div>Audit Trail (Recent)</div></div>
+            <div class="audit-row">
+              <div class="audit-dot" style="background:#DC2626"></div>
+              <div class="audit-time">Today 11:42 AM</div>
+              <div><strong>Status change:</strong> MNN-004603 → Escalated (Actor: rk.pandey | IP: 10.0.1.4)</div>
+            </div>
+            <div class="audit-row">
+              <div class="audit-dot" style="background:#D97706"></div>
+              <div class="audit-time">Today 10:05 AM</div>
+              <div><strong>Transfer:</strong> MNN-004412 Sanitation → Roads (Actor: admin | IP: 10.0.1.2)</div>
+            </div>
+            <div class="audit-row">
+              <div class="audit-dot" style="background:#16A34A"></div>
+              <div class="audit-time">Yesterday 4:31 PM</div>
+              <div><strong>Resolved:</strong> MNN-004380 by Rahul Verma (Actor: r.verma | IP: 10.0.2.8)</div>
+            </div>
+            <div class="audit-row">
+              <div class="audit-dot" style="background:#6B7280"></div>
+              <div class="audit-time">Yesterday 9:12 AM</div>
+              <div><strong>User created:</strong> nidhi.kumar (Role: Field Officer) by admin</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="pane-queue" style="display:none">
+        <div style="padding:20px;text-align:center;color:var(--muted);font-size:12px">&#128196; Full grievance queue with filters, bulk routing, and internal notes panel would render here.</div>
+      </div>
+      <div id="pane-analytics" style="display:none">
+        <div style="padding:20px;text-align:center;color:var(--muted);font-size:12px">&#128200; Category trend charts, department-wise resolution analytics, and ward drill-downs would render here.</div>
+      </div>
+      <div id="pane-sysadmin" style="display:none">
+        <div style="padding:20px;text-align:center;color:var(--muted);font-size:12px">&#9881; User management, RBAC matrix, SLA config panel, holiday calendar, and SMS template editor would render here.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showPane(name){
+  ['overview','queue','analytics','sysadmin'].forEach(p=>{
+    document.getElementById('pane-'+p).style.display = p===name?'block':'none';
+  });
+  document.querySelectorAll('.adm-ntab').forEach((t,i)=>{
+    t.classList.toggle('act',['overview','queue','analytics','sysadmin'][i]===name);
+  });
+}
+</script>
